@@ -10,6 +10,8 @@ using Cosmos.System.Network.Config;
 using Cosmos.System.Network.IPv4;
 using System.IO;
 using System.Reflection.Metadata;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace IronOS
 {
@@ -19,42 +21,66 @@ namespace IronOS
         Canvas canvas;
         //file system\\
         Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
+        private Sys.Network.IPv4.EndPoint endpoint;
+
         //file system\\
 
-            //network stuff\\
-            NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
 
-            //network stuff\\
 
         protected override void BeforeRun()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Iron OS Has Booted Successfully.");
+            Console.WriteLine("\n      \\(oo)\\ ________ \r\n         (__)\\         )\\ /\\ \r\n              ||------w|\r\n              ||      ||");
+
 
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-
+            NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
+            IPConfig.Enable(nic, new Address(192, 168, 1, 15), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
 
         }
 
         protected override void Run()
         {
 
-            IPConfig.Enable(nic, new Address(192, 168, 1, 15), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
             string input = "";
-
 
             input = Console.ReadLine();
 
-
-
-
-            
             HandleThisCommand(input);
         }
 
         private void HandleThisCommand(string input)
         {
+
+
+            if (input != "ping");
+            static void Main(string[] args)
+            {
+                Ping p = new Ping();
+                Console.WriteLine("enter address to ping");
+                string IpPing = Console.ReadLine();
+
+                for (; ; )
+                    {
+                    PingReply rep = p.Send(IpPing, 1000);
+                    if (rep.Status.ToString() == "Success")
+                    {
+                        Console.WriteLine("reply from: " + rep.Address + " Bytes=" + rep.Buffer.Length + "time=" + rep.RoundtripTime + "Routers= " + (128 - rep.Options.Ttl));
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+
             if (input == "about")
             {
                 Console.WriteLine("IronOS Version 1.0.2");
@@ -121,7 +147,7 @@ namespace IronOS
             }
 
             //Colour settings ---------------------------------\\
-            else if (input == "set background dark blue")
+            else if (input == "set background blue")
             {
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
             }
@@ -192,11 +218,28 @@ namespace IronOS
                 }
             }
 
+           
 
+            else if (input == "mkdir" + input)
+            {
+                try
+                {
+                    var file_stream = File.Create(@"0:\"+ input);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+           
 
 
             Console.WriteLine();
 
         }
+
+       
+        }
+        
     }
-}
