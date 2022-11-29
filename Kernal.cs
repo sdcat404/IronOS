@@ -2,41 +2,66 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Sys = Cosmos.System;
+using Cosmos.System.Graphics;
+using System.Drawing;
+using Cosmos.System.Network;
+using Cosmos.HAL;
+using Cosmos.System.Network.Config;
+using Cosmos.System.Network.IPv4;
+using System.IO;
+using System.Reflection.Metadata;
 
 namespace IronOS
 {
     public class Kernel : Sys.Kernel
     {
-        
 
+        Canvas canvas;
+        //file system\\
+        Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
+        //file system\\
+
+            //network stuff\\
+            NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
+
+            //network stuff\\
 
         protected override void BeforeRun()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            
             Console.WriteLine("Iron OS Has Booted Successfully.");
-            
+
+            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+
+
+
         }
 
         protected override void Run()
         {
+
+            IPConfig.Enable(nic, new Address(192, 168, 1, 15), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
             string input = "";
 
 
             input = Console.ReadLine();
 
 
+
+
+            
             HandleThisCommand(input);
         }
 
         private void HandleThisCommand(string input)
         {
             if (input == "about")
-            { Console.WriteLine("IronOS Version 1.0");
+            {
+                Console.WriteLine("IronOS Version 1.0.2");
             }
 
-         
-           else if (input == "help")
+
+            else if (input == "help")
             {
                 Console.WriteLine(" ");
                 Console.WriteLine("About -- Shows information about the OS");
@@ -54,6 +79,12 @@ namespace IronOS
                 Console.WriteLine("Set Text (colour) -- Sets the Text colour");
                 Console.WriteLine(" ");
                 Console.WriteLine("time -- Displays Time");
+                Console.WriteLine(" ");
+                Console.WriteLine("whoami -- Shows logged in user");
+                Console.WriteLine(" ");
+                Console.WriteLine("ip -- Shows your ip address");
+                Console.WriteLine(" ");
+                Console.WriteLine("disk space  -- Shows available space");
             }
 
             else if (input == "shutdown")
@@ -74,7 +105,7 @@ namespace IronOS
             {
                 Console.Clear();
             }
-            else if (input =="restart")
+            else if (input == "restart")
             {
                 Console.WriteLine("Restarting In Five Seconds");
                 System.Threading.Thread.Sleep(1000);
@@ -131,11 +162,41 @@ namespace IronOS
                 Console.WriteLine(DateTime.Now.ToString());
             }
 
+            else if (input == "apt")
+            {
+                Console.WriteLine("This isn't linux...");
+            }
+
+            else if (input == "whoami")
+            {
+                Console.WriteLine("User0");
+            }
+
+            else if (input == "ip")
+            {
+                Console.WriteLine(NetworkConfiguration.CurrentAddress.ToString());
+            }
+
+            else if (input == "disk space")
+            {
+                var available_space = fs.GetAvailableFreeSpace(@"0:\");
+                Console.WriteLine("Available Free Space: " + available_space);
+            }
+
+            else if (input == "dir")
+            {
+                var directory_list = Directory.GetFiles(@"0:\");
+                foreach (var file in directory_list)
+                {
+                    Console.WriteLine(file);
+                }
+            }
+
 
 
 
             Console.WriteLine();
-           
+
         }
     }
 }
