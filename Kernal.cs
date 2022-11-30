@@ -115,6 +115,10 @@ namespace IronOS
                 Console.WriteLine("mkdir  -- Creates Direcotry");
                 Console.WriteLine(" ");
                 Console.WriteLine("deldir  -- Deletes Direcotry");
+                Console.WriteLine(" ");
+                Console.WriteLine("meow  -- writes to file");
+                Console.WriteLine(" ");
+                Console.WriteLine("read  -- reads file content");
             }
 
             else if (input == "shutdown")
@@ -213,6 +217,8 @@ namespace IronOS
                 Console.WriteLine("Available Free Space: " + available_space);
             }
 
+
+            //----------------FILE SYSTEM----------------\\
             else if (input == "dir")
             {
                 var directory_list = Directory.GetFiles(@"0:\");
@@ -257,6 +263,40 @@ namespace IronOS
                 }
             }
 
+            else if (input == "meow")
+            {
+
+                try
+                {
+                    Console.WriteLine("What file do you wish to write to?");
+                    string write = Console.ReadLine();
+                    Console.WriteLine("What do you want the file to say?");
+                    string write2 = Console.ReadLine();
+                    File.WriteAllText(@"0:\" + write, write2);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+
+
+            }
+
+            else if (input == "read")
+            {
+                try
+                {
+                    Console.WriteLine("file name");
+                    string read = Console.ReadLine();
+                    Console.WriteLine(File.ReadAllText(@"0:\" + read));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+            //----------------FILE SYSTEM----------------\\
 
 
 
