@@ -55,7 +55,7 @@ namespace IronOS
         {
 
 
-            if (input != "ping");
+            if (input != "ping") ;
             static void Main(string[] args)
             {
                 Ping p = new Ping();
@@ -63,7 +63,7 @@ namespace IronOS
                 string IpPing = Console.ReadLine();
 
                 for (; ; )
-                    {
+                {
                     PingReply rep = p.Send(IpPing, 1000);
                     if (rep.Status.ToString() == "Success")
                     {
@@ -83,7 +83,7 @@ namespace IronOS
 
             if (input == "about")
             {
-                Console.WriteLine("IronOS Version 1.0.2");
+                Console.WriteLine("IronOS Version 1.0.3");
             }
 
 
@@ -111,6 +111,10 @@ namespace IronOS
                 Console.WriteLine("ip -- Shows your ip address");
                 Console.WriteLine(" ");
                 Console.WriteLine("disk space  -- Shows available space");
+                Console.WriteLine(" ");
+                Console.WriteLine("mkdir  -- Creates Direcotry");
+                Console.WriteLine(" ");
+                Console.WriteLine("deldir  -- Deletes Direcotry");
             }
 
             else if (input == "shutdown")
@@ -218,15 +222,17 @@ namespace IronOS
                 }
             }
 
-           
+
 
             else if (input == "mkdir")
             {
                 try
-                { string make = Console.ReadLine();
+                {
+                    Console.WriteLine("What Do We Call This Directory?");
+                    string make = Console.ReadLine();
                     {
                     }
-                    var file_stream = File.Create(@"0:\"+ make);
+                    var file_stream = File.Create(@"0:\" + make);
                 }
                 catch (Exception e)
                 {
@@ -235,7 +241,22 @@ namespace IronOS
             }
 
 
-        
+            else if (input == "deldir")
+            {
+                try
+                {
+                    Console.WriteLine("What Direcotry Do You Want To Remove?");
+                    string del = Console.ReadLine();
+                    {
+                    }
+                    File.Delete(@"0:\" + del);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
 
 
 
@@ -243,7 +264,7 @@ namespace IronOS
 
         }
 
-       
-        }
-        
+
     }
+
+}
