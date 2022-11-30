@@ -12,6 +12,9 @@ using System.IO;
 using System.Reflection.Metadata;
 using System.Net;
 using System.Net.NetworkInformation;
+using Cosmos.System.Network.IPv4.UDP.DHCP;
+using System.Threading;
+
 
 namespace IronOS
 {
@@ -27,6 +30,7 @@ namespace IronOS
 
 
 
+
         protected override void BeforeRun()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -38,13 +42,19 @@ namespace IronOS
 
             NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
             IPConfig.Enable(nic, new Address(192, 168, 1, 15), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
+           
 
         }
 
         protected override void Run()
         {
 
-            string input = "";
+            using (var xClient = new DHCPClient())
+            {
+                
+                xClient.SendDiscoverPacket();
+            }
+            string input = " ";
 
             input = Console.ReadLine();
 
@@ -53,33 +63,6 @@ namespace IronOS
 
         private void HandleThisCommand(string input)
         {
-
-
-            if (input != "ping") ;
-            static void Main(string[] args)
-            {
-                Ping p = new Ping();
-                Console.WriteLine("enter address to ping");
-                string IpPing = Console.ReadLine();
-
-                for (; ; )
-                {
-                    PingReply rep = p.Send(IpPing, 1000);
-                    if (rep.Status.ToString() == "Success")
-                    {
-                        Console.WriteLine("reply from: " + rep.Address + " Bytes=" + rep.Buffer.Length + "time=" + rep.RoundtripTime + "Routers= " + (128 - rep.Options.Ttl));
-                    }
-                }
-            }
-
-
-
-
-
-
-
-
-
 
             if (input == "about")
             {
