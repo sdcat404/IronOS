@@ -73,35 +73,26 @@ namespace IronOS
             else if (input == "help")
             {
                 Console.WriteLine(" ");
-                Console.WriteLine("About -- Shows information about the OS");
+                Console.WriteLine("All commands are case specific.");
+                Console.WriteLine("_______________________________");
+                Console.WriteLine("about     :     Shows information about the OS");
+                Console.WriteLine("Help     :     Shows commands");
+                Console.WriteLine("Clear     :     Clears terminal output");
+                Console.WriteLine("Shutdown     :     Shuts down the machine");
                 Console.WriteLine(" ");
-                Console.WriteLine("Help -- Shows commands");
+                Console.WriteLine("Restart     :     Restarts The Machine");
+                Console.WriteLine("Set Background (colour)     :     Sets the background colour");
+                Console.WriteLine("Set Text (colour)     :     Sets the Text colour");
+                Console.WriteLine("time     :     Displays Time");
                 Console.WriteLine(" ");
-                Console.WriteLine("Clear -- Clears terminal output");
+                Console.WriteLine("whoami     :     Shows logged in user");
+                Console.WriteLine("ip     :     Shows your ip address");
+                Console.WriteLine("disk space     :     Shows available space");
+                Console.WriteLine("mkdir     :     Creates Direcotry");
                 Console.WriteLine(" ");
-                Console.WriteLine("Shutdown -- Shuts down the machine");
-                Console.WriteLine(" ");
-                Console.WriteLine("Restart -- Restarts The Machine");
-                Console.WriteLine(" ");
-                Console.WriteLine("Set Background (colour) -- Sets the background colour");
-                Console.WriteLine(" ");
-                Console.WriteLine("Set Text (colour) -- Sets the Text colour");
-                Console.WriteLine(" ");
-                Console.WriteLine("time -- Displays Time");
-                Console.WriteLine(" ");
-                Console.WriteLine("whoami -- Shows logged in user");
-                Console.WriteLine(" ");
-                Console.WriteLine("ip -- Shows your ip address");
-                Console.WriteLine(" ");
-                Console.WriteLine("disk space  -- Shows available space");
-                Console.WriteLine(" ");
-                Console.WriteLine("mkdir  -- Creates Direcotry");
-                Console.WriteLine(" ");
-                Console.WriteLine("deldir  -- Deletes Direcotry");
-                Console.WriteLine(" ");
-                Console.WriteLine("meow  -- writes to file");
-                Console.WriteLine(" ");
-                Console.WriteLine("read  -- reads file content");
+                Console.WriteLine("deldir     :     Deletes Direcotry");
+                Console.WriteLine("meow     :     writes to file");
+                Console.WriteLine("read     :     reads file content");
             }
 
             else if (input == "shutdown")
