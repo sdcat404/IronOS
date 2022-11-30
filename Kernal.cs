@@ -220,11 +220,13 @@ namespace IronOS
 
            
 
-            else if (input == "mkdir" + input)
+            else if (input == "mkdir")
             {
                 try
-                {
-                    var file_stream = File.Create(@"0:\"+ input);
+                { string make = Console.ReadLine();
+                    {
+                    }
+                    var file_stream = File.Create(@"0:\"+ make);
                 }
                 catch (Exception e)
                 {
@@ -232,7 +234,9 @@ namespace IronOS
                 }
             }
 
-           
+
+        
+
 
 
             Console.WriteLine();
