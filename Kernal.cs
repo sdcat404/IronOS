@@ -39,7 +39,7 @@ namespace IronOS
         {
 
 
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Iron OS Has Booted Successfully.");
             Console.WriteLine(@"
 
