@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using Cosmos.System.Network.IPv4.UDP.DHCP;
 using System.Threading;
+using Cosmos.Core;
 
 
 namespace IronOS
@@ -25,33 +27,53 @@ namespace IronOS
         //file system\\
         Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
         private Sys.Network.IPv4.EndPoint endpoint;
+        private string xFirstByte;
 
         //file system\\
 
 
 
 
+
         protected override void BeforeRun()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+
+
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("Iron OS Has Booted Successfully.");
-            Console.WriteLine("\n      \\(oo)\\ ________ \r\n         (__)\\         )\\ /\\ \r\n              ||------w|\r\n              ||      ||");
+            Console.WriteLine(@"
+
+  ,-.       _,---._ __  / \
+ /  )    .-'       `./ /   \
+(  (   ,'            `/    /|
+ \  `-""             \'\   / |
+  `.              ,  \ \ /  |
+   /`.          ,'-`----Y   |
+  (            ;        |   '
+  |  ,-.    ,-'         |  /
+  |  | (   |    Iron OS | /
+  )  |  \  `.___________|/
+  `--'   `--'
+
+
+");
 
 
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
             NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
             IPConfig.Enable(nic, new Address(192, 168, 1, 15), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
-           
+
 
         }
 
         protected override void Run()
         {
 
+
             using (var xClient = new DHCPClient())
             {
-                
+
                 xClient.SendDiscoverPacket();
             }
             string input = " ";
@@ -63,6 +85,7 @@ namespace IronOS
 
         private void HandleThisCommand(string input)
         {
+            
 
             if (input == "about")
             {
@@ -75,22 +98,22 @@ namespace IronOS
                 Console.WriteLine(" ");
                 Console.WriteLine("All commands are case specific.");
                 Console.WriteLine("_______________________________");
-                Console.WriteLine("about     :     Shows information about the OS");
+                Console.WriteLine("about    :     Shows information about the OS");
                 Console.WriteLine("help     :     Shows commands");
-                Console.WriteLine("clear     :     Clears terminal output");
-                Console.WriteLine("shutdown     :     Shuts down the machine");
+                Console.WriteLine("clear    :     Clears terminal output");
+                Console.WriteLine("shutdown :     Shuts down the machine");
                 Console.WriteLine(" ");
-                Console.WriteLine("restart     :     Restarts The Machine");
+                Console.WriteLine("restart                     :     Restarts The Machine");
                 Console.WriteLine("set background (colour)     :     Sets the background colour");
-                Console.WriteLine("set text (colour)     :     Sets the Text colour");
-                Console.WriteLine("time     :     Displays Time");
+                Console.WriteLine("set text (colour)           :     Sets the Text colour");
+                Console.WriteLine("time                        :     Displays Time");
                 Console.WriteLine(" ");
-                Console.WriteLine("whoami     :     Shows logged in user");
-                Console.WriteLine("ip     :     Shows your ip address");
-                Console.WriteLine("disk space     :     Shows available space");
-                Console.WriteLine("mkdir     :     Creates Direcotry");
+                Console.WriteLine("whoami      :     Shows logged in user");
+                Console.WriteLine("ip          :     Shows your ip address");
+                Console.WriteLine("disk space  :     Shows available space");
+                Console.WriteLine("mkdir       :     Creates Direcotry");
                 Console.WriteLine(" ");
-                Console.WriteLine("deldir     :     Deletes Direcotry");
+                Console.WriteLine("deldir   :     Deletes Direcotry");
                 Console.WriteLine("meow     :     writes to file");
                 Console.WriteLine("read     :     reads file content");
             }
@@ -277,8 +300,6 @@ namespace IronOS
             Console.WriteLine();
 
         }
-
-
     }
 
-}
+    }
