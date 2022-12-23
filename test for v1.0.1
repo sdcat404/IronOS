@@ -15,7 +15,7 @@ using System.Net.NetworkInformation;
 using Cosmos.System.Network.IPv4.UDP.DHCP;
 using System.Threading;
 using Cosmos.Core;
-
+using Cosmos.System.Network.IPv4.UDP.DNS;
 
 namespace IronOS
 {
@@ -25,18 +25,24 @@ namespace IronOS
         Canvas canvas;
         //file system\\
         Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
-        private Sys.Network.IPv4.EndPoint endpoint;
         private string xFirstByte;
+        private Sys.Network.IPv4.EndPoint EndPoint;
 
         //file system\\
 
+        NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
 
 
 
 
         protected override void BeforeRun()
         {
+            IPConfig.Enable(nic, new Address(192, 168, 1, 69), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
+            using (var xClient = new DHCPClient())
+            {
 
+                xClient.SendDiscoverPacket();
+            }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Iron OS Has Booted Successfully.");
@@ -57,21 +63,17 @@ namespace IronOS
 
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
-            NetworkDevice nic = NetworkDevice.GetDeviceByName("eth0");
-            IPConfig.Enable(nic, new Address(192, 168, 1, 15), new Address(255, 255, 255, 0), new Address(192, 168, 1, 254));
+            
 
 
         }
 
         protected override void Run()
         {
+            
 
 
-            using (var xClient = new DHCPClient())
-            {
-
-                xClient.SendDiscoverPacket();
-            }
+          
             string input = " ";
 
             input = Console.ReadLine();
@@ -295,12 +297,24 @@ namespace IronOS
 
 
 
+            else if (input == "ping")
+            {
+                Console.WriteLine("What shall we ping?");
+                string ping = Console.ReadLine();
+                using (var xClient = new DnsClient())
+                {
+                    xClient.Connect(new Address(192, 168, 1, 254)); //DNS Server address
 
+                    /** Send DNS ask for a single domain name **/
+                    xClient.SendAsk(ping);
 
+                    /** Receive DNS Response **/
+                    Address destination = xClient.Receive();
+                    Console.WriteLine(destination.ToString());
+                    //can set a timeout value
+                }
 
-
-
-
+            }
 
 
 
