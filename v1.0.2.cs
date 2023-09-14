@@ -131,7 +131,7 @@ namespace IronOS
                 Console.WriteLine("meow     :     writes to file");
                 Console.WriteLine("read     :     reads file content");
                 Console.WriteLine("dir      :     lists all files");
-                Console.WriteLine("hello    :     DO NOT USE.");
+                Console.WriteLine("hello    :     Says hello back.");
             }
 
             else if (input == "shutdown")
@@ -316,46 +316,11 @@ namespace IronOS
             else if (input == "hello")
             {
                 Console.Clear();
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
+                ;
 
-                Console.WriteLine("Hello... whats your name?");
-                string name = Console.ReadLine();
-                System.Threading.Thread.Sleep(1000);
+             Console.Writeline("Hello!");
 
-                System.Threading.Thread.Sleep(1000);
-
-                Console.WriteLine("Well, Hello, " + name);
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
-
-                Console.WriteLine("Tell me... " + name);
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
-
-                Console.WriteLine("Do you belive in true AI?");
-                string blank = Console.ReadLine();
-                Console.WriteLine("Interesting");
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
-
-                Console.WriteLine("How are you feeling today " + name + "?");
-                string feeling = Console.ReadLine();
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
-
-                Console.WriteLine("I dont really have any feelings");
-                System.Threading.Thread.Sleep(1000);
-
-                System.Threading.Thread.Sleep(1000);
-                Console.WriteLine("Id love to feel " + feeling);
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
-
-                Console.WriteLine("Anyway... I best go now.");
-                System.Threading.Thread.Sleep(1000);
-                System.Threading.Thread.Sleep(1000);
+            
 
                 Console.Clear();
 
