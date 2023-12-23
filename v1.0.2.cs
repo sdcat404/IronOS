@@ -16,9 +16,7 @@ using Cosmos.System.Network.IPv4.UDP.DHCP;
 using System.Threading;
 using Cosmos.Core;
 using Cosmos.System.Network.IPv4.UDP.DNS;
-
-
-
+using System.ComponentModel.Design;
 
 namespace IronOS
 {
@@ -27,7 +25,7 @@ namespace IronOS
 
         Canvas canvas;
         //file system\\
-        Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
+        //Sys.FileSystem.CosmosVFS fs = new Sys.FileSystem.CosmosVFS();
         private string xFirstByte;
         private Sys.Network.IPv4.EndPoint EndPoint;
 
@@ -62,9 +60,9 @@ namespace IronOS
   )  |  \  `.___v1.0.2__|/
   `--'   `--'    
 ");
+            Console.WriteLine("Type 'help' for commands.");
 
-
-            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+            //Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
 
 
 
@@ -132,6 +130,7 @@ namespace IronOS
                 Console.WriteLine("read     :     reads file content");
                 Console.WriteLine("dir      :     lists all files");
                 Console.WriteLine("hello    :     Says hello back.");
+                Console.WriteLine(":)    :     read the output");
             }
 
             else if (input == "shutdown")
@@ -226,8 +225,8 @@ namespace IronOS
 
             else if (input == "disk space")
             {
-                var available_space = fs.GetAvailableFreeSpace(@"0:\");
-                Console.WriteLine("Available Free Space: " + available_space);
+                //var available_space = fs.GetAvailableFreeSpace(@"0:\");
+                //Console.WriteLine("Available Free Space: " + available_space);
             }
 
 
@@ -295,6 +294,8 @@ namespace IronOS
 
             }
 
+
+
             else if (input == "read")
             {
                 try
@@ -313,22 +314,19 @@ namespace IronOS
 
             //-----------------TEST CODE------------------\\
 
+
+
             else if (input == "hello")
             {
-                Console.Clear();
-                ;
-
-             Console.Writeline("Hello!");
-
-            
-
-                Console.Clear();
-
-
-
+                Console.WriteLine("Hi!");
             }
-
-
+            else if (input == ":)")
+            {
+                Console.WriteLine(@"
+:)
+        
+");
+            }
 
 
 
@@ -338,7 +336,7 @@ namespace IronOS
 
 
             else Console.WriteLine("Command not found");
-            Console.WriteLine();                
+            Console.WriteLine();
 
         }
     }
